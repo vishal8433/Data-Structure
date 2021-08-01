@@ -1,0 +1,76 @@
+package q;
+
+import java.util.NoSuchElementException;
+
+public class queue {
+    private ListNode front;
+    private ListNode rear;
+    private int length;
+    private class ListNode{
+        private int data;
+        private ListNode next;
+        public ListNode(int data){
+            this.data=data;
+            this.next=null;
+
+        }
+    }
+    public queue(){
+        front=null;
+        rear=null;
+        length=0;
+    }
+    public int length(){
+
+        return length;
+    }
+
+    public boolean isempty(){
+
+        return length==0;
+    }
+    public void enqueue(int data){
+        ListNode temp=new ListNode(data);
+        if(isempty()){
+            front=temp;
+        }
+        else{
+            rear.next=temp;
+        }
+        rear=temp;
+        length++;
+    }
+
+    public int dequeue(int i){
+        if(isempty()){
+            throw new NoSuchElementException("queue is already empty");
+        }
+        int result=front.data;
+        front=front.next;
+        if(front==null){
+            rear=null;
+        }
+        length--;
+        return result;
+    }
+    public void display(){
+        ListNode current=front;
+        while (current!=null){
+            System.out.println(current.data);
+            current=current.next;
+        }
+
+    }
+    public static void main(String[] args) {
+        queue Q=new queue();
+        Q.enqueue(10);
+        Q.enqueue(20);
+        Q.enqueue(30);
+        Q.enqueue(40);
+        System.out.println("queue after enqueue operation");
+        Q.display();
+        Q.dequeue(10);
+        System.out.println("queue after dequeue operation");
+        Q.display();
+    }
+}
