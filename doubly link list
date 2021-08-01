@@ -1,0 +1,107 @@
+package doubly_link_list;
+
+import java.util.NoSuchElementException;
+
+public class DLL {
+    private Listnode head;
+    private Listnode tail;
+    private int length;
+    private class Listnode{
+        private int data;
+        private Listnode next;
+        private Listnode previous;
+        public Listnode(int data){
+            this.data=data;
+        }
+    }
+    public DLL(){
+        this.head=null;
+        this.tail=null;
+        this.length=0;
+    }
+    public boolean isempt(){
+        return length==0;
+    }
+    public void insertfirst(int data){
+        Listnode newnode=new Listnode(data);
+        if(isempt()){
+            tail=newnode;
+        }
+        else {
+            head.previous=newnode;
+        }
+        newnode.next=head;
+        head=newnode;
+        length++;
+    }
+
+    public void insertend(int data){
+        Listnode newnode=new Listnode(data);
+        if(isempt()){
+            head=newnode;
+        }
+        else{
+            tail.next=newnode;
+            newnode.previous=tail;
+        }
+        tail=newnode;
+        length++;
+
+    }
+
+    public void disfor(){
+        if(head==null){
+            return;
+        }
+        Listnode temp=head;
+        while (temp!=null){
+            System.out.println(temp.data);
+            temp=temp.next;
+        }
+    }
+    public void disback(){
+        if(head==null){
+            return;
+        }
+        Listnode temp=tail;
+        while (temp!=null){
+            System.out.println(temp.data);
+            temp=temp.previous;
+        }
+
+    }
+    public Listnode deletefirst(){
+        if(isempt()){
+            throw new NoSuchElementException();
+        }
+        Listnode temp=head;
+        if(head==tail){
+            tail=null;
+        }
+        else{
+            head.next.previous=null;
+        }
+        head=head.next;
+        temp.next=null;
+        length--;
+        return  temp;
+    }
+
+    public static void main(String[] args) {
+        DLL dll=new DLL();
+        dll.insertfirst(10);
+        dll.insertfirst(20);
+        dll.insertfirst(26);
+        dll.insertfirst(200);
+        dll.insertend(500);
+        dll.insertfirst(300);
+        System.out.println("forward opr");
+        dll.disfor();
+        System.out.println("back op");
+        dll.disback();
+        dll.deletefirst();
+        System.out.println("after delete");
+        dll.disfor();
+    }
+}
+
