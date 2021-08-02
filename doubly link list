@@ -86,6 +86,20 @@ public class DLL {
         length--;
         return  temp;
     }
+    public void delete(int pos){
+        if(pos==1){
+            head=head.next;
+        }else {
+            Listnode previous=head;
+            int count=1;
+            while (count<pos-1){
+                previous=previous.next;
+                count++;
+            }
+            Listnode current=previous.next;
+            previous.next=current.next;
+        }
+    }
 
     public static void main(String[] args) {
         DLL dll=new DLL();
