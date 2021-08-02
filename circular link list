@@ -59,6 +59,22 @@ public class CLL {
 
 
     }
+    
+    public void delete(int pos){
+        if(pos==1){
+            last=last.next;
+        }else {
+            Listnode previous=last;
+            int count=1;
+            while (count<pos){
+                previous=previous.next;
+                count++;
+            }
+            Listnode current=previous.next;
+            previous.next=current.next;
+        }
+    }
+    
      public void display(){
          if(last==null){
              return;
